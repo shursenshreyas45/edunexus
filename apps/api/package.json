@@ -1,0 +1,29 @@
+{
+    "name": "@edunexus/api",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/server.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/src/server.js",
+        "dev": "node --watch --env-file=.env --require ts-node/register src/server.ts",
+        "test": "node --require ts-node/register --test tests/**/*.test.ts"
+    },
+    "dependencies": {
+        "@edunexus/shared": "*",
+        "cors": "^2.8.6",
+        "dotenv": "^16.4.7",
+        "express": "^4.18.2",
+        "helmet": "^8.1.0",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^4.17.21",
+        "@types/helmet": "^0.0.48",
+        "@types/node": "^20.0.0",
+        "@types/pg": "^8.10.9",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.0"
+    }
+}

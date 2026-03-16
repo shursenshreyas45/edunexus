@@ -1,0 +1,17 @@
+{
+  "name": "edunexus-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others --names \"API,CLIENT\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run dev --workspace=@edunexus/api\" \"cd apps/client && npx expo start --web -c\"",
+    "build:api": "tsc --project apps/api/tsconfig.json",
+    "start:api": "node apps/api/dist/server.js"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
