@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Pressable, RefreshControl, TextInput } from 'react-native';
+import { Image } from 'expo-image';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
 import { API_URL } from '../../config/api';
@@ -17,6 +18,7 @@ type Listing = {
   ownerFullName?: string;
   ownerSchoolName?: string;
   ownerEmail?: string;
+  imageUrl?: string | null;
   createdAt: string;
 };
 
@@ -121,6 +123,13 @@ export default function MarketplaceFeed() {
 
     return (
       <View style={styles.card}>
+        {item.imageUrl ? (
+          <Image
+            source={{ uri: item.imageUrl }}
+            style={styles.listingImage}
+            contentFit="cover"
+          />
+        ) : null}
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>{item.title}</Text>
           <Text style={styles.cardPrice}>
@@ -158,6 +167,7 @@ export default function MarketplaceFeed() {
   }
 
   return (
+    <View style={styles.outerContainer}>
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <TextInput
@@ -200,10 +210,16 @@ export default function MarketplaceFeed() {
         <Text style={styles.fabText}>+</Text>
       </Pressable>
     </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+  },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -211,6 +227,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    width: '100%',
+    maxWidth: 800,
     backgroundColor: '#f5f5f5',
   },
   listContent: {
@@ -227,6 +245,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
+    overflow: 'hidden',
+  },
+  listingImage: {
+    width: '100%',
+    height: 180,
+    borderRadius: 8,
+    marginBottom: 10,
   },
   cardHeader: {
     flexDirection: 'row',

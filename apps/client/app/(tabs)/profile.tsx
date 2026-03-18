@@ -117,6 +117,7 @@ export default function ProfileScreen() {
     // Render form (Create or Edit)
     if (isEditing || !profile) {
         return (
+            <View style={styles.outerContainer}>
             <View style={styles.container}>
                 <Text style={styles.headerTitle}>{profile ? 'Edit Profile' : 'Set Up Profile'}</Text>
 
@@ -175,11 +176,13 @@ export default function ProfileScreen() {
                     </Pressable>
                 )}
             </View>
+            </View>
         );
     }
 
     // Render Directory Card
     return (
+        <View style={styles.outerContainer}>
         <View style={styles.container}>
             <View style={styles.card}>
                 <Text style={styles.cardTitle}>{profile.full_name}</Text>
@@ -202,10 +205,16 @@ export default function ProfileScreen() {
                 <Text style={styles.buttonText}>Logout</Text>
             </Pressable>
         </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    outerContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+    },
     centerContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -213,6 +222,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        width: '100%',
+        maxWidth: 800,
         padding: 20,
         backgroundColor: '#fff',
     },

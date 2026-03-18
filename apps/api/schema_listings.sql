@@ -12,6 +12,7 @@ CREATE TABLE listings (
     condition INTEGER NOT NULL CHECK (condition >= 1 AND condition <= 5),
     price DECIMAL(10,2) NOT NULL DEFAULT 0.00 CHECK (price >= 0),
     status listing_status NOT NULL DEFAULT 'Available',
+    image_url TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
