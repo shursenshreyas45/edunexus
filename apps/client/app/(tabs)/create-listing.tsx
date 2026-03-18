@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, ActivityIndicator, ScrollView, Platform } from 'react-native';
+import { Image } from 'expo-image';
+import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
 import { API_URL } from '../../config/api';
@@ -15,11 +17,36 @@ export default function CreateListingScreen() {
     const [category, setCategory] = useState(CATEGORIES[0]);
     const [condition, setCondition] = useState('3');
     const [price, setPrice] = useState('');
+    const [imageUri, setImageUri] = useState<string | null>(null);
+    const [imageBase64, setImageBase64] = useState<string | null>(null);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMSG, setErrorMSG] = useState('');
 
     const conditionOptions = ['1', '2', '3', '4', '5'];
+
+    const pickImage = async () => {
+        if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMSG('Permission to access photos is required.');
+                return;
+            }
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 0.7,
+            base64: true,
+        });
+
+        if (!result.canceled && result.assets[0]) {
+            setImageUri(result.assets[0].uri);
+            setImageBase64(result.assets[0].base64 || null);
+        }
+    };
 
     const handleSubmit = async () => {
         if (!title.trim() || !description.trim() || !category || !condition || price === '') {
@@ -41,12 +68,12 @@ export default function CreateListingScreen() {
                     description: description.trim(),
                     category,
                     condition: parseInt(condition, 10),
-                    price: parseFloat(price) || 0
+                    price: parseFloat(price) || 0,
+                    imageBase64: imageBase64 ? `data:image/jpeg;base64,${imageBase64}` : undefined,
                 })
             });
 
             if (response.ok) {
-                // Return to the feed and trigger refresh
                 router.push({ pathname: '/', params: { refresh: String(Date.now()) } });
             } else {
                 const data = await response.json();
@@ -82,6 +109,15 @@ export default function CreateListingScreen() {
                 multiline
                 numberOfLines={4}
             />
+
+            <Text style={styles.label}>Photo (Optional)</Text>
+            <Pressable style={styles.imagePicker} onPress={pickImage}>
+                {imageUri ? (
+                    <Image source={{ uri: imageUri }} style={styles.imagePreview} contentFit="cover" />
+                ) : (
+                    <Text style={styles.imagePickerText}>Tap to add a photo</Text>
+                )}
+            </Pressable>
 
             <Text style={styles.label}>Price ($)</Text>
             <TextInput
@@ -167,6 +203,26 @@ const styles = StyleSheet.create({
     textArea: {
         height: 100,
         textAlignVertical: 'top',
+    },
+    imagePicker: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        borderStyle: 'dashed',
+        backgroundColor: '#fafafa',
+        height: 160,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 8,
+        overflow: 'hidden',
+    },
+    imagePickerText: {
+        color: '#888',
+        fontSize: 15,
+    },
+    imagePreview: {
+        width: '100%',
+        height: '100%',
     },
     row: {
         flexDirection: 'row',

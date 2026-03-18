@@ -1,16 +1,40 @@
 import { Request, Response } from 'express';
 import { pool } from '../config/db';
+import { supabase } from '../config/supabase';
+
+async function uploadImageToSupabase(imageBase64: string, ownerId: string): Promise<string | null> {
+    if (!supabase) {
+        console.warn('Supabase client not configured — skipping image upload');
+        return null;
+    }
+
+    // Strip the data URI prefix (e.g. "data:image/jpeg;base64,")
+    const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const fileName = `${ownerId}/${Date.now()}.jpg`;
+
+    const { error } = await supabase.storage
+        .from('listings')
+        .upload(fileName, buffer, { contentType: 'image/jpeg', upsert: false });
+
+    if (error) {
+        console.error('Supabase Storage upload error:', error.message);
+        return null;
+    }
+
+    const { data } = supabase.storage.from('listings').getPublicUrl(fileName);
+    return data.publicUrl;
+}
 
 export async function createListing(req: Request, res: Response) {
     try {
         const ownerId = req.user.id;
-        const { title, description, category, condition, price } = req.body;
+        const { title, description, category, condition, price, imageBase64 } = req.body;
 
         if (!title || !category || condition === undefined || price === undefined) {
             return res.status(400).json({ error: 'Title, category, condition, and price are required' });
         }
 
-        // Strict Input Validation per Guideline 13
         if (typeof condition !== 'number' || condition < 1 || condition > 5) {
             return res.status(400).json({ error: 'Condition must be an integer between 1 and 5' });
         }
@@ -25,11 +49,17 @@ export async function createListing(req: Request, res: Response) {
             return res.status(400).json({ error: 'Invalid category' });
         }
 
+        // Upload image to Supabase Storage if provided
+        let imageUrl: string | null = null;
+        if (imageBase64 && typeof imageBase64 === 'string') {
+            imageUrl = await uploadImageToSupabase(imageBase64, ownerId);
+        }
+
         const result = await pool.query(
-            `INSERT INTO listings (owner_id, title, description, category, condition, price)
-             VALUES ($1, $2, $3, $4, $5, $6)
-             RETURNING id, owner_id as "ownerId", title, description, category, condition, price, status, created_at as "createdAt", updated_at as "updatedAt"`,
-            [ownerId, title, description || null, category, Math.floor(condition), parsedPrice.toFixed(2)]
+            `INSERT INTO listings (owner_id, title, description, category, condition, price, image_url)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
+             RETURNING id, owner_id as "ownerId", title, description, category, condition, price, status, image_url as "imageUrl", created_at as "createdAt", updated_at as "updatedAt"`,
+            [ownerId, title, description || null, category, Math.floor(condition), parsedPrice.toFixed(2), imageUrl]
         );
 
         res.status(201).json({ listing: result.rows[0] });
@@ -41,19 +71,17 @@ export async function createListing(req: Request, res: Response) {
 
 export async function getListingsFeed(req: Request, res: Response) {
     try {
-        // Pagination logic (Guideline 10)
         let limit = parseInt(req.query.limit as string) || 20;
         let offset = parseInt(req.query.offset as string) || 0;
 
-        // Defensive limits to prevent memory exhaustion
         if (limit > 50) limit = 50;
         if (limit < 1) limit = 20;
         if (offset < 0) offset = 0;
 
         const search = req.query.search as string;
 
-        let query = `SELECT l.id, l.owner_id as "ownerId", l.title, l.description, l.category, 
-                    l.condition, l.price, l.status, l.created_at as "createdAt", l.updated_at as "updatedAt",
+        let query = `SELECT l.id, l.owner_id as "ownerId", l.title, l.description, l.category,
+                    l.condition, l.price, l.status, l.image_url as "imageUrl", l.created_at as "createdAt", l.updated_at as "updatedAt",
                     p.full_name as "ownerFullName", p.school_name as "ownerSchoolName",
                     u.email as "ownerEmail"
              FROM listings l
@@ -87,8 +115,8 @@ export async function getListingById(req: Request, res: Response) {
         const { id } = req.params;
 
         const result = await pool.query(
-            `SELECT l.id, l.owner_id as "ownerId", l.title, l.description, l.category, 
-                    l.condition, l.price, l.status, l.created_at as "createdAt", l.updated_at as "updatedAt",
+            `SELECT l.id, l.owner_id as "ownerId", l.title, l.description, l.category,
+                    l.condition, l.price, l.status, l.image_url as "imageUrl", l.created_at as "createdAt", l.updated_at as "updatedAt",
                     p.full_name as "ownerFullName", p.school_name as "ownerSchoolName",
                     u.email as "ownerEmail"
              FROM listings l

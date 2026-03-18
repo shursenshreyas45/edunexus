@@ -10,6 +10,7 @@ export interface Listing {
     condition: number; // 1 to 5
     price: number;
     status: ListingStatus;
+    imageUrl?: string | null;
     createdAt: Date;
     updatedAt: Date;
 }

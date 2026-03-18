@@ -13,8 +13,8 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
-// Parse JSON bodies
-app.use(express.json());
+// Parse JSON bodies — 50mb limit to support Base64 image uploads
+app.use(express.json({ limit: '50mb' }));
 
 // Auth Routes
 app.post('/register', register);

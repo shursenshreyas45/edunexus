@@ -121,6 +121,7 @@ export default function SearchScreen() {
     );
 
     return (
+        <View style={styles.outerContainer}>
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TextInput
@@ -156,10 +157,16 @@ export default function SearchScreen() {
                 />
             )}
         </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    outerContainer: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+        alignItems: 'center',
+    },
     centerContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -167,6 +174,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        width: '100%',
+        maxWidth: 800,
         backgroundColor: '#f5f5f5',
     },
     searchContainer: {
