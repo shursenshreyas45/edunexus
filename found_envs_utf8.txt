@@ -1,2 +1,2 @@
-﻿C:\Users\windows11\.gemini\antigravity\scratch\edunexus\apps\api\.env
+C:\Users\windows11\.gemini\antigravity\scratch\edunexus\apps\api\.env
 C:\Users\windows11\.gemini\antigravity\scratch\edunexus\apps\client\.env
