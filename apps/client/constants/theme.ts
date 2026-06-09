@@ -1,31 +1,55 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * EduNexus Color Palette - Blue theme with accent colors
  */
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#f8fafc',
-    primary: '#2563eb',
-    secondary: '#f59e0b',
-    tint: '#2563eb',
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: '#2563eb',
+    text: '#1e293b',
+    textSecondary: '#64748b',
+    background: '#f1f5f9',
+    surface: '#ffffff',
+    primary: '#3b82f6',
+    primaryDark: '#2563eb',
+    primaryLight: '#60a5fa',
+    secondary: '#8b5cf6',
+    accent: '#06b6d4',
+    success: '#10b981',
+    successLight: '#d1fae5',
+    warning: '#f59e0b',
+    warningLight: '#fef3c7',
+    error: '#ef4444',
+    errorLight: '#fee2e2',
+    tint: '#3b82f6',
+    icon: '#64748b',
+    tabIconDefault: '#94a3b8',
+    tabIconSelected: '#3b82f6',
+    border: '#e2e8f0',
+    borderLight: '#f1f5f9',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#f1f5f9',
+    textSecondary: '#94a3b8',
+    background: '#0f172a',
+    surface: '#1e293b',
+    primary: '#60a5fa',
+    primaryDark: '#3b82f6',
+    primaryLight: '#93c5fd',
+    secondary: '#a78bfa',
+    accent: '#22d3ee',
+    success: '#34d399',
+    successLight: '#064e3b',
+    warning: '#fbbf24',
+    warningLight: '#78350f',
+    error: '#f87171',
+    errorLight: '#7f1d1d',
+    tint: '#60a5fa',
+    icon: '#94a3b8',
+    tabIconDefault: '#64748b',
+    tabIconSelected: '#60a5fa',
+    border: '#334155',
+    borderLight: '#1e293b',
   },
 };
 

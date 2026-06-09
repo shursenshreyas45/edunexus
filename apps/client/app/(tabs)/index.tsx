@@ -153,7 +153,7 @@ export default function MarketplaceFeed() {
     if (!isLoadingMore) return null;
     return (
       <View style={styles.footerLoader}>
-        <ActivityIndicator size="small" color="#0000ff" />
+        <ActivityIndicator size="small" color="#3b82f6" />
       </View>
     );
   };
@@ -161,7 +161,7 @@ export default function MarketplaceFeed() {
   if (initialLoading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#3b82f6" />
       </View>
     );
   }
@@ -217,41 +217,44 @@ export default function MarketplaceFeed() {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f1f5f9',
     alignItems: 'center',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f1f5f9',
   },
   container: {
     flex: 1,
     width: '100%',
     maxWidth: 800,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f1f5f9',
   },
   listContent: {
     padding: 16,
-    paddingBottom: 80, // Space for FAB
+    paddingBottom: 80,
   },
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
     padding: 16,
     marginBottom: 16,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    shadowColor: '#1e293b',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
     overflow: 'hidden',
   },
   listingImage: {
     width: '100%',
     height: 180,
-    borderRadius: 8,
-    marginBottom: 10,
+    borderRadius: 12,
+    marginBottom: 12,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -261,43 +264,47 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     flex: 1,
     marginRight: 8,
-    color: '#000',
+    color: '#1e293b',
   },
   cardPrice: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#28a745',
+    fontWeight: '700',
+    color: '#10b981',
   },
   cardCategory: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 13,
+    color: '#64748b',
     fontWeight: '500',
     marginBottom: 4,
   },
   cardOwner: {
     fontSize: 13,
-    color: '#888',
+    color: '#94a3b8',
     marginBottom: 8,
-    fontStyle: 'italic',
   },
   cardDescription: {
     fontSize: 14,
-    color: '#444',
+    color: '#475569',
+    lineHeight: 20,
   },
   emptyText: {
     textAlign: 'center',
     marginTop: 40,
     fontSize: 16,
-    color: '#888',
+    color: '#64748b',
   },
   errorText: {
-    color: 'red',
+    color: '#ef4444',
     textAlign: 'center',
-    padding: 10,
-    backgroundColor: '#ffe6e6',
+    padding: 12,
+    backgroundColor: '#fee2e2',
+    marginHorizontal: 16,
+    marginTop: 8,
+    borderRadius: 8,
+    fontWeight: '500',
   },
   footerLoader: {
     paddingVertical: 20,
@@ -307,51 +314,58 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 24,
     right: 24,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#007AFF',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#3b82f6',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
+    elevation: 8,
+    shadowColor: '#3b82f6',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
   },
   fabText: {
-    fontSize: 32,
-    color: '#fff',
+    fontSize: 28,
+    color: '#ffffff',
     fontWeight: '300',
-    lineHeight: 34,
+    lineHeight: 30,
   },
   searchContainer: {
     flexDirection: 'row',
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: '#e2e8f0',
     alignItems: 'center',
   },
   searchInput: {
     flex: 1,
-    backgroundColor: '#f8fafc',
-    borderRadius: 8,
+    backgroundColor: '#f1f5f9',
+    borderRadius: 12,
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 12,
     fontSize: 16,
-    marginRight: 10,
+    marginRight: 12,
     borderWidth: 1,
     borderColor: '#e2e8f0',
+    color: '#1e293b',
   },
   searchButton: {
-    backgroundColor: '#2563eb', // EduNexus Primary
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 8,
+    backgroundColor: '#3b82f6',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    shadowColor: '#3b82f6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
   },
   searchButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 15,
   },
 });

@@ -30,6 +30,7 @@ export default function RegisterScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Create Account</Text>
+            <Text style={styles.subtitle}>Join the EduNexus community</Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -84,77 +85,96 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 24,
-        backgroundColor: '#fff',
+        backgroundColor: '#f1f5f9',
     },
     title: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        marginBottom: 32,
+        fontSize: 32,
+        fontWeight: '700',
+        marginBottom: 8,
         textAlign: 'center',
-        color: '#333',
+        color: '#1e293b',
+    },
+    subtitle: {
+        fontSize: 16,
+        color: '#64748b',
+        textAlign: 'center',
+        marginBottom: 32,
     },
     label: {
-        fontSize: 16,
+        fontSize: 14,
         marginBottom: 8,
-        color: '#555',
+        color: '#64748b',
         fontWeight: '600'
     },
     tierContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 24,
+        gap: 8,
     },
     tierButton: {
         flex: 1,
-        padding: 12,
+        padding: 14,
         borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 8,
+        borderColor: '#e2e8f0',
+        borderRadius: 12,
         alignItems: 'center',
-        marginHorizontal: 4,
+        backgroundColor: '#ffffff',
     },
     tierButtonActive: {
-        backgroundColor: '#007AFF',
-        borderColor: '#007AFF',
+        backgroundColor: '#3b82f6',
+        borderColor: '#3b82f6',
     },
     tierText: {
-        color: '#555',
+        color: '#64748b',
+        fontWeight: '500',
     },
     tierTextActive: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: '#ffffff',
+        fontWeight: '600',
     },
     input: {
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#e2e8f0',
+        backgroundColor: '#ffffff',
         padding: 16,
-        borderRadius: 8,
+        borderRadius: 12,
         marginBottom: 16,
         fontSize: 16,
+        color: '#1e293b',
     },
     button: {
-        backgroundColor: '#007AFF',
+        backgroundColor: '#3b82f6',
         padding: 16,
-        borderRadius: 8,
+        borderRadius: 12,
         alignItems: 'center',
         marginTop: 8,
+        shadowColor: '#3b82f6',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 4,
     },
     buttonText: {
-        color: '#fff',
+        color: '#ffffff',
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '600',
     },
     linkButton: {
         marginTop: 24,
         alignItems: 'center',
     },
     linkText: {
-        color: '#007AFF',
+        color: '#3b82f6',
         fontSize: 16,
+        fontWeight: '500',
     },
     errorText: {
-        color: '#ff3b30',
+        color: '#ef4444',
         marginBottom: 16,
         textAlign: 'center',
+        backgroundColor: '#fee2e2',
+        padding: 12,
+        borderRadius: 8,
     },
 });

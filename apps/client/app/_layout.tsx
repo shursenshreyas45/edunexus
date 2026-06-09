@@ -14,19 +14,16 @@ function RootLayoutNav() {
     const inAuthGroup = segments[0] === '(auth)';
 
     if (!user && !inAuthGroup) {
-      // Redirect to login if user is not authenticated and trying to access protected routes
       router.replace('/login');
     } else if (user && inAuthGroup) {
-      // Redirect to main app if signed in but accessing auth screens
-      // Let's assume (tabs) group exists to redirect to later
       router.replace('/');
     }
   }, [user, isLoading, segments]);
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#007AFF" />
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#3b82f6" />
       </View>
     );
   }
@@ -47,11 +44,17 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f1f5f9',
+  },
   webContainer: {
     flex: 1,
     maxWidth: 800,
     width: '100%',
     alignSelf: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f1f5f9',
   }
 });

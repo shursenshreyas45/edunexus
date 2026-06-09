@@ -6,8 +6,21 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: true,
-        tabBarActiveTintColor: '#007AFF',
-        tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' }
+        headerStyle: { backgroundColor: '#ffffff' },
+        headerTintColor: '#1e293b',
+        headerTitleStyle: { fontWeight: '600' },
+        tabBarActiveTintColor: '#3b82f6',
+        tabBarInactiveTintColor: '#94a3b8',
+        tabBarStyle: {
+          backgroundColor: '#ffffff',
+          borderTopColor: '#e2e8f0',
+          elevation: 8,
+          shadowColor: '#1e293b',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 8,
+        },
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '600', marginTop: 4 }
       }}>
       <Tabs.Screen
         name="index"

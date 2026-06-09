@@ -174,7 +174,7 @@ export default function WarRoomsScreen() {
         if (!isLoadingMore) return null;
         return (
             <View style={styles.footerLoader}>
-                <ActivityIndicator size="small" color="#0000ff" />
+                <ActivityIndicator size="small" color="#3b82f6" />
             </View>
         );
     };
@@ -188,7 +188,7 @@ export default function WarRoomsScreen() {
 
             {initialLoading ? (
                 <View style={styles.centerContainer}>
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size="large" color="#3b82f6" />
                 </View>
             ) : (
                 <FlatList
@@ -224,76 +224,82 @@ export default function WarRoomsScreen() {
 const styles = StyleSheet.create({
     outerContainer: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f1f5f9',
         alignItems: 'center',
     },
     centerContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#f1f5f9',
     },
     container: {
         flex: 1,
         width: '100%',
         maxWidth: 800,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f1f5f9',
     },
     tagFiltersContainer: {
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         borderBottomWidth: 1,
-        borderBottomColor: '#eee',
-        paddingVertical: 10,
+        borderBottomColor: '#e2e8f0',
+        paddingVertical: 12,
     },
     tagFiltersContent: {
         paddingHorizontal: 16,
     },
     filterPill: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingHorizontal: 18,
+        paddingVertical: 10,
         borderRadius: 20,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#f1f5f9',
         marginRight: 8,
+        borderWidth: 1,
+        borderColor: '#e2e8f0',
     },
     filterPillActive: {
-        backgroundColor: '#007AFF',
+        backgroundColor: '#3b82f6',
+        borderColor: '#3b82f6',
     },
     filterPillText: {
-        color: '#333',
-        fontWeight: '500',
+        color: '#64748b',
+        fontWeight: '600',
+        fontSize: 14,
     },
     filterPillTextActive: {
-        color: '#fff',
+        color: '#ffffff',
     },
     listContent: {
         padding: 16,
-        paddingBottom: 80, // Space for FAB
+        paddingBottom: 80,
     },
     card: {
-        backgroundColor: '#fff',
-        borderRadius: 12,
-        padding: 16,
+        backgroundColor: '#ffffff',
+        borderRadius: 16,
+        padding: 18,
         marginBottom: 16,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
+        borderWidth: 1,
+        borderColor: '#e2e8f0',
+        shadowColor: '#1e293b',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
     },
     cardTitle: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginBottom: 4,
-        color: '#000',
+        color: '#1e293b',
     },
     cardAuthor: {
         fontSize: 13,
-        color: '#888',
-        marginBottom: 10,
-        fontStyle: 'italic',
+        color: '#94a3b8',
+        marginBottom: 12,
     },
     cardContent: {
         fontSize: 15,
-        color: '#444',
+        color: '#475569',
         lineHeight: 22,
         marginBottom: 12,
     },
@@ -302,29 +308,33 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     tagView: {
-        backgroundColor: '#E5F1FF',
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        borderRadius: 6,
+        backgroundColor: '#dbeafe',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 8,
         marginRight: 6,
         marginBottom: 6,
     },
     tagText: {
-        color: '#007AFF',
+        color: '#3b82f6',
         fontSize: 12,
-        fontWeight: '500',
+        fontWeight: '600',
     },
     emptyText: {
         textAlign: 'center',
         marginTop: 40,
         fontSize: 16,
-        color: '#888',
+        color: '#64748b',
     },
     errorText: {
-        color: 'red',
+        color: '#ef4444',
         textAlign: 'center',
-        padding: 10,
-        backgroundColor: '#ffe6e6',
+        padding: 12,
+        backgroundColor: '#fee2e2',
+        marginHorizontal: 16,
+        marginTop: 8,
+        borderRadius: 8,
+        fontWeight: '500',
     },
     footerLoader: {
         paddingVertical: 20,
@@ -334,22 +344,22 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 24,
         right: 24,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: '#007AFF',
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: '#3b82f6',
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 5,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
+        elevation: 8,
+        shadowColor: '#3b82f6',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 8,
     },
     fabText: {
-        fontSize: 32,
-        color: '#fff',
+        fontSize: 28,
+        color: '#ffffff',
         fontWeight: '300',
-        lineHeight: 34,
+        lineHeight: 30,
     }
 });
