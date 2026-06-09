@@ -1,24 +1,17 @@
-export interface EnvConfig {
-    PORT: number;
-    DATABASE_URL: string;
-    JWT_SECRET: string;
-    SUPABASE_URL: string;
-    SUPABASE_SERVICE_ROLE_KEY: string;
-}
-
-const getEnvVar = (key: string): string => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.env = void 0;
+const getEnvVar = (key) => {
     const value = process.env[key];
     if (!value) {
         throw new Error(`CRITICAL: Missing required environment variable: ${key}`);
     }
     return value;
 };
-
-const getEnvVarWithFallback = (key: string, fallbackKey: string): string => {
+const getEnvVarWithFallback = (key, fallbackKey) => {
     return process.env[key] || process.env[fallbackKey] || '';
 };
-
-export const env: EnvConfig = {
+exports.env = {
     PORT: parseInt(process.env.PORT || '3000', 10),
     // Use DATABASE_URL if set, otherwise fall back to SUPABASE_DB_URL (pre-populated by Supabase)
     DATABASE_URL: process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || '',
